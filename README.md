@@ -1,6 +1,6 @@
 # Cone detection
 Currently the program performs cone detection from given input images.  
-It is using serialized tensor rt engine created from yolov5 network weights.  
+It is using serialized TensorRT engine created from YOLOv5 network weights.  
 It does preprocessing, inference and postprocessing.  
 Furthermore it converts returned bounding boxes coordinates to original image size and draws them on the original image.  
 Lastly, marked images are saved into the output path defined in config.py
