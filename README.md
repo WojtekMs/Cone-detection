@@ -5,6 +5,10 @@ It does preprocessing, inference and postprocessing.
 Furthermore it converts returned bounding boxes coordinates to original image size and draws them on the original image.  
 Lastly, marked images are saved into the output path defined in config.py
 
+# Examples
+![9](https://github.com/WojtekMs/Cone-detection/blob/master/data/output/9.jpg?raw=true)
+![4](https://github.com/WojtekMs/Cone-detection/blob/master/data/output/4.jpg?raw=true)
+
 ## Notes
 - memory allocated by pycuda.driver does not need to be freed explicitly (object frees memory when is being destroyed)
 - tensor rt context is like creating a new UNIX process (can be used for multi-threading) at least one context is necessary to run application
