@@ -5,6 +5,18 @@ It does preprocessing, inference and postprocessing.
 Furthermore it converts returned bounding boxes coordinates to original image size and draws them on the original image.  
 Lastly, marked images are saved into the output path defined in config.py
 
+# Building
+This application uses CUDA library, hence it is necessary to have Nvidia Graphics Card in order to build & run this project.  
+1. setup virtual environment
+- python3 -m virtualenv venv
+- source venv/bin/activate
+
+2. install dependencies
+- pip install -r requirements.txt
+
+3. launch the application
+- ./cone_detection.py
+
 # Examples
 ![9](https://github.com/WojtekMs/Cone-detection/blob/master/data/output/9.jpg?raw=true)
 ![4](https://github.com/WojtekMs/Cone-detection/blob/master/data/output/4.jpg?raw=true)
