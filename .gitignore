@@ -1,2 +1,6 @@
 __*
 venv
+*.so
+*.engine
+/data/output/
+build*
