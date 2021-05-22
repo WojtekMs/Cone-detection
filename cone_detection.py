@@ -52,9 +52,9 @@ if __name__ == "__main__":
             for img_path in img_paths:
                 print(f'Image: {img_path}')
                 img = cv2.imread(img_path)
-                detections, resize_ratio, padding_size = detect(engine, img)
+                detections = detect(engine, img)
                 print(f'Number of detections: {len(detections[0])}')
-                img = draw_detections(img, transform_detected_coords_to_original(detections, resize_ratio, padding_size))
+                img = draw_detections(img, detections)
                 img_save_path = os.path.join(SAVE_PATH, img_path.split('/')[-1])
                 cv2.imwrite(img_save_path, img)
                 print(f"Img is saved to {img_save_path}")

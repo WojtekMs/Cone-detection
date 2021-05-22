@@ -5,13 +5,14 @@ import numpy as np
 
 from cone_detection.preprocess import preprocess_img
 from cone_detection.postprocess import postprocess
+from cone_detection.utils import transform_detected_coords_to_original
 
-def detect(engine, img):
+def detect(engine: trt.ICudaEngine, img: np.ndarray) -> "tuple[np.ndarray, np.ndarray, np.ndarray]":
     #this function performs network execution on the given img
     #additionally this function does preprocessing and postprocessing of img
     #param engine: tensor rt engine created from network weights
     #param img: image to perform detection on
-    #return value: predictions (tuple), resize_ratio (float), padding_size (int)  
+    #return value: predictions in original image coordinates
     #predictions: bounding boxes, confidences, class_ids
 
     with engine.create_execution_context() as context:
@@ -37,9 +38,10 @@ def detect(engine, img):
         # Synchronize the stream
         stream.synchronize()
         postprocess_start = time.time()
-        predictions = postprocess(h_output, resize_ratio, padding_size)
+        predictions = postprocess(h_output)
+        predictions_in_original_coords = transform_detected_coords_to_original(predictions, resize_ratio, padding_size)
         postprocess_stop = time.time()
         print(f"Preprocessing time: {(preprocess_stop - preprocess_start) * 1000:.4f} ms")
         print(f"Postprocessing time: {(postprocess_stop - postprocess_start) * 1000:.4f} ms")
         print(f"Complete detection time: {(postprocess_stop - preprocess_start) * 1000:.4f} ms")
-    return predictions, resize_ratio, padding_size
+    return predictions_in_original_coords
